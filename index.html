@@ -35,7 +35,6 @@
     overflow-x: hidden;
   }
 
-  /* subtle noise overlay */
   body::before {
     content:'';
     position:fixed;
@@ -54,20 +53,13 @@
     z-index: 1;
   }
 
-  /* ── HEADER ── */
   .header {
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
     margin-bottom: 24px;
   }
-  .header h1 {
-    font-size: 30px;
-    font-weight: 600;
-    color: #fff;
-    letter-spacing: -0.5px;
-    line-height: 1.1;
-  }
+  .header h1 { font-size: 30px; font-weight: 600; color: #fff; letter-spacing: -0.5px; line-height: 1.1; }
   .header p { font-size: 15px; color: var(--text2); margin-top: 3px; }
   .date-pill {
     background: var(--surface2);
@@ -79,7 +71,6 @@
     white-space: nowrap;
   }
 
-  /* ── WEEK STRIP ── */
   .week-strip {
     display: flex;
     gap: 6px;
@@ -111,28 +102,11 @@
   .day-dot { width: 5px; height: 5px; border-radius: 50%; background: transparent; }
   .day-btn.has-data .day-dot { background: var(--accent); }
 
-  /* ── PROGRESS ── */
   .progress-wrap { margin-bottom: 20px; }
-  .progress-head {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 8px;
-  }
-  .section-label {
-    font-size: 12px;
-    font-weight: 500;
-    color: var(--text3);
-    text-transform: uppercase;
-    letter-spacing: 1.2px;
-  }
+  .progress-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+  .section-label { font-size: 12px; font-weight: 500; color: var(--text3); text-transform: uppercase; letter-spacing: 1.2px; }
   .pct { font-size: 15px; font-weight: 500; color: var(--text2); }
-  .bar-bg {
-    height: 5px;
-    background: var(--border);
-    border-radius: 99px;
-    overflow: hidden;
-  }
+  .bar-bg { height: 5px; background: var(--border); border-radius: 99px; overflow: hidden; }
   .bar-fill {
     height: 100%;
     background: linear-gradient(90deg, var(--accent), var(--accent-light));
@@ -140,82 +114,52 @@
     transition: width 0.5s cubic-bezier(.4,0,.2,1);
   }
 
-  /* ── STATS ── */
-  .stats-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 8px;
-    margin-bottom: 24px;
-  }
-  .stat {
-    background: var(--surface);
-    border: 0.5px solid var(--border);
-    border-radius: 14px;
-    padding: 14px 10px;
-    text-align: center;
-  }
-  .stat-val {
-    font-size: 26px;
-    font-weight: 600;
-    color: #fff;
-    line-height: 1;
-    margin-bottom: 5px;
-  }
+  .stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 24px; }
+  .stat { background: var(--surface); border: 0.5px solid var(--border); border-radius: 14px; padding: 14px 10px; text-align: center; }
+  .stat-val { font-size: 26px; font-weight: 600; color: #fff; line-height: 1; margin-bottom: 5px; }
   .stat.purple .stat-val { color: var(--accent-light); }
   .stat.gold .stat-val { color: var(--fire); }
   .stat-lbl { font-size: 12px; color: var(--text3); }
 
-  /* ── HABITS LIST ── */
   .habits-list { display: flex; flex-direction: column; gap: 8px; margin-bottom: 8px; }
 
   .habit-card {
     background: var(--surface);
     border: 0.5px solid var(--border);
     border-radius: 16px;
-    padding: 14px 14px 14px 14px;
+    padding: 14px;
     display: flex;
     align-items: center;
     gap: 13px;
     position: relative;
-    transition: transform 0.12s, border-color 0.2s, background 0.2s;
+    transition: transform 0.12s, border-color 0.2s, background 0.2s, opacity 0.2s;
     -webkit-user-select: none;
     user-select: none;
+    touch-action: none;
   }
-  .habit-card.done {
-    border-color: var(--accent);
-    background: var(--accent-dim);
-  }
-  .habit-card:active { transform: scale(0.98); }
+  .habit-card.done { border-color: var(--accent); background: var(--accent-dim); }
+  .habit-card.dragging { opacity: 0.4; transform: scale(0.97); }
+  .habit-card.drag-over { border-color: var(--accent-light); transform: scale(1.01); }
 
-  .habit-icon {
-    width: 50px; height: 50px;
-    border-radius: 13px;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 26px;
+  .drag-handle {
+    color: var(--text3);
+    font-size: 20px;
+    cursor: grab;
     flex-shrink: 0;
+    padding: 4px 2px;
+    touch-action: none;
   }
+  .drag-handle:active { cursor: grabbing; }
+
+  .habit-icon { width: 50px; height: 50px; border-radius: 13px; display: flex; align-items: center; justify-content: center; font-size: 26px; flex-shrink: 0; }
   .habit-body { flex: 1; min-width: 0; }
-  .habit-name {
-    font-size: 17px;
-    font-weight: 500;
-    color: var(--text);
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    margin-bottom: 3px;
-  }
+  .habit-name { font-size: 17px; font-weight: 500; color: var(--text); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; margin-bottom: 3px; }
   .habit-card.done .habit-name { color: var(--text3); text-decoration: line-through; }
-  .habit-streak {
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
-    font-size: 14px;
-    color: var(--fire);
-    font-weight: 500;
-  }
+  .habit-streak { display: inline-flex; align-items: center; gap: 4px; font-size: 14px; color: var(--fire); font-weight: 500; }
   .habit-streak i { font-size: 15px; }
 
-  .check-btn {
+  .habit-actions { display: flex; gap: 6px; flex-shrink: 0; }
+  .edit-btn, .check-btn {
     width: 36px; height: 36px;
     border-radius: 50%;
     border: 1.5px solid var(--border2);
@@ -225,11 +169,11 @@
     transition: all 0.18s;
     flex-shrink: 0;
   }
+  .edit-btn i { font-size: 17px; color: var(--text3); }
+  .edit-btn:hover { border-color: var(--accent); }
+  .edit-btn:hover i { color: var(--accent-light); }
   .check-btn i { font-size: 19px; color: transparent; }
-  .habit-card.done .check-btn {
-    background: var(--accent);
-    border-color: var(--accent);
-  }
+  .habit-card.done .check-btn { background: var(--accent); border-color: var(--accent); }
   .habit-card.done .check-btn i { color: #fff; }
 
   .del-btn {
@@ -245,42 +189,45 @@
     transition: opacity 0.15s;
     padding: 0;
   }
-  .habit-card:hover .del-btn,
-  .habit-card:focus-within .del-btn { opacity: 1; }
+  .habit-card:hover .del-btn { opacity: 1; }
   .del-btn i { font-size: 11px; color: var(--text3); }
 
-  /* ── EMPTY ── */
-  .empty {
-    text-align: center;
-    padding: 40px 20px;
-    color: var(--text3);
-  }
+  .empty { text-align: center; padding: 40px 20px; color: var(--text3); }
   .empty i { font-size: 38px; margin-bottom: 10px; display: block; opacity: 0.5; }
   .empty p { font-size: 14px; line-height: 1.6; }
 
-  /* ── ADD FORM ── */
-  .add-card {
+  /* ── MODAL EDITAR ── */
+  .modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.7);
+    z-index: 500;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s;
+  }
+  .modal-overlay.open { opacity: 1; pointer-events: all; }
+  .modal {
     background: var(--surface);
     border: 0.5px solid var(--border);
-    border-radius: 18px;
-    padding: 18px;
-    margin-bottom: 14px;
+    border-radius: 24px 24px 0 0;
+    padding: 24px 20px 40px;
+    width: 100%;
+    max-width: 480px;
+    transform: translateY(100%);
+    transition: transform 0.3s cubic-bezier(.4,0,.2,1);
   }
-  .add-card h3 {
-    font-size: 13px;
-    font-weight: 500;
-    color: var(--text2);
-    margin-bottom: 14px;
-  }
+  .modal-overlay.open .modal { transform: translateY(0); }
+  .modal-title { font-size: 18px; font-weight: 600; color: #fff; margin-bottom: 20px; }
+  .modal-form { display: flex; flex-direction: column; gap: 14px; }
+  .field-label { font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: 1px; color: var(--text3); margin-bottom: 7px; }
+
+  .add-card { background: var(--surface); border: 0.5px solid var(--border); border-radius: 18px; padding: 18px; margin-bottom: 14px; }
   .form-col { display: flex; flex-direction: column; gap: 12px; }
-  .field-label {
-    font-size: 10px;
-    font-weight: 500;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    color: var(--text3);
-    margin-bottom: 7px;
-  }
+
   input.habit-input {
     width: 100%;
     background: var(--bg);
@@ -296,11 +243,7 @@
   input.habit-input:focus { border-color: var(--accent); }
   input.habit-input::placeholder { color: var(--text3); }
 
-  .emoji-grid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-  }
+  .emoji-grid { display: flex; flex-wrap: wrap; gap: 6px; }
   .emo {
     width: 44px; height: 44px;
     border-radius: 11px;
@@ -314,13 +257,7 @@
   .emo.sel { border-color: var(--accent); background: var(--accent-dim); }
 
   .color-row { display: flex; gap: 8px; flex-wrap: wrap; }
-  .col-opt {
-    width: 30px; height: 30px;
-    border-radius: 50%;
-    cursor: pointer;
-    border: 2.5px solid transparent;
-    transition: border-color 0.12s, transform 0.1s;
-  }
+  .col-opt { width: 30px; height: 30px; border-radius: 50%; cursor: pointer; border: 2.5px solid transparent; transition: border-color 0.12s, transform 0.1s; }
   .col-opt.sel { border-color: #fff; transform: scale(1.15); }
 
   .submit-btn {
@@ -338,42 +275,20 @@
     transition: background 0.15s, transform 0.1s;
   }
   .submit-btn:active { background: #6b5ae6; transform: scale(0.98); }
+  .submit-btn.secondary { background: var(--surface2); color: var(--text2); margin-top: 4px; }
 
-  /* ── STATS SCREEN ── */
-  .habit-hist {
-    background: var(--surface);
-    border: 0.5px solid var(--border);
-    border-radius: 14px;
-    padding: 13px 14px;
-    margin-bottom: 8px;
-  }
-  .hist-name {
-    font-size: 15px;
-    font-weight: 500;
-    color: var(--text2);
-    margin-bottom: 9px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
+  .habit-hist { background: var(--surface); border: 0.5px solid var(--border); border-radius: 14px; padding: 13px 14px; margin-bottom: 8px; }
+  .hist-name { font-size: 15px; font-weight: 500; color: var(--text2); margin-bottom: 9px; display: flex; align-items: center; gap: 8px; }
   .mini-fire { font-size: 14px; color: var(--fire); display:flex; align-items:center; gap:3px; }
   .dots-row { display: flex; gap: 5px; }
   .dot-cell {
-    flex: 1;
-    aspect-ratio: 1;
-    max-width: 40px;
-    border-radius: 8px;
-    background: var(--bg);
-    border: 0.5px solid var(--border);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 12px;
-    color: var(--text3);
+    flex: 1; aspect-ratio: 1; max-width: 40px;
+    border-radius: 8px; background: var(--bg); border: 0.5px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; color: var(--text3);
   }
   .dot-cell.done-c { background: var(--accent); border-color: var(--accent); color: #fff; }
 
-  /* ── TAB BAR ── */
   .tab-bar {
     position: fixed;
     bottom: 0; left: 0; right: 0;
@@ -387,33 +302,20 @@
     z-index: 200;
   }
   .tab {
-    flex: 1;
-    max-width: 130px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 3px;
-    background: none;
-    border: none;
-    cursor: pointer;
-    color: var(--text3);
-    transition: color 0.15s;
-    padding: 4px 0;
-    font-family: inherit;
+    flex: 1; max-width: 130px;
+    display: flex; flex-direction: column; align-items: center; gap: 3px;
+    background: none; border: none; cursor: pointer;
+    color: var(--text3); transition: color 0.15s;
+    padding: 4px 0; font-family: inherit;
   }
   .tab.active { color: var(--accent-light); }
   .tab i { font-size: 28px; }
   .tab span { font-size: 12px; font-weight: 500; }
 
-  /* ── SCREENS ── */
   .screen { display: none; }
   .screen.active { display: block; }
 
-  /* ── ANIMATIONS ── */
-  @keyframes fadeUp {
-    from { opacity:0; transform: translateY(8px); }
-    to { opacity:1; transform: translateY(0); }
-  }
+  @keyframes fadeUp { from { opacity:0; transform: translateY(8px); } to { opacity:1; transform: translateY(0); } }
   .habit-card { animation: fadeUp 0.2s ease both; }
 </style>
 </head>
@@ -430,9 +332,7 @@
       </div>
       <div class="date-pill" id="hdr-date">—</div>
     </div>
-
     <div class="week-strip" id="week-strip"></div>
-
     <div class="progress-wrap">
       <div class="progress-head">
         <span class="section-label">Progreso de hoy</span>
@@ -440,46 +340,25 @@
       </div>
       <div class="bar-bg"><div class="bar-fill" id="bar" style="width:0%"></div></div>
     </div>
-
     <div class="stats-grid">
-      <div class="stat purple">
-        <div class="stat-val" id="s-today">0/0</div>
-        <div class="stat-lbl">Hoy ✓</div>
-      </div>
-      <div class="stat gold">
-        <div class="stat-val" id="s-streak">0</div>
-        <div class="stat-lbl">Mejor racha 🔥</div>
-      </div>
-      <div class="stat">
-        <div class="stat-val" id="s-total">0</div>
-        <div class="stat-lbl">Total</div>
-      </div>
+      <div class="stat purple"><div class="stat-val" id="s-today">0/0</div><div class="stat-lbl">Hoy ✓</div></div>
+      <div class="stat gold"><div class="stat-val" id="s-streak">0</div><div class="stat-lbl">Mejor racha 🔥</div></div>
+      <div class="stat"><div class="stat-val" id="s-total">0</div><div class="stat-lbl">Total</div></div>
     </div>
-
     <div class="section-label" style="margin-bottom:12px">Hábitos de hoy</div>
     <div class="habits-list" id="habit-list"></div>
   </div>
 
   <!-- STATS -->
   <div class="screen" id="sc-stats">
-    <div class="header">
-      <div>
-        <h1>Estadísticas</h1>
-        <p>Últimos 7 días</p>
-      </div>
-    </div>
+    <div class="header"><div><h1>Estadísticas</h1><p>Últimos 7 días</p></div></div>
     <div class="section-label" style="margin-bottom:12px">Historial por hábito</div>
     <div id="hist-list"></div>
   </div>
 
   <!-- ADD -->
   <div class="screen" id="sc-add">
-    <div class="header">
-      <div>
-        <h1>Nuevo hábito</h1>
-        <p>Sin límites, es tuyo</p>
-      </div>
-    </div>
+    <div class="header"><div><h1>Nuevo hábito</h1><p>Sin límites, es tuyo</p></div></div>
     <div class="add-card">
       <div class="form-col">
         <div>
@@ -494,25 +373,40 @@
           <div class="field-label">Color</div>
           <div class="color-row" id="col-pick"></div>
         </div>
-        <button class="submit-btn" onclick="addHabit()">
-          <i class="ti ti-plus"></i> Agregar hábito
-        </button>
+        <button class="submit-btn" onclick="addHabit()"><i class="ti ti-plus"></i> Agregar hábito</button>
       </div>
     </div>
   </div>
 
 </div>
 
+<!-- MODAL EDITAR -->
+<div class="modal-overlay" id="edit-overlay" onclick="closeEdit(event)">
+  <div class="modal">
+    <div class="modal-title">Editar hábito</div>
+    <div class="modal-form">
+      <div>
+        <div class="field-label">Nombre</div>
+        <input class="habit-input" id="edit-name" maxlength="40">
+      </div>
+      <div>
+        <div class="field-label">Ícono</div>
+        <div class="emoji-grid" id="edit-emo-pick"></div>
+      </div>
+      <div>
+        <div class="field-label">Color</div>
+        <div class="color-row" id="edit-col-pick"></div>
+      </div>
+      <button class="submit-btn" onclick="saveEdit()"><i class="ti ti-check"></i> Guardar cambios</button>
+      <button class="submit-btn secondary" onclick="delFromEdit()"><i class="ti ti-trash"></i> Eliminar hábito</button>
+    </div>
+  </div>
+</div>
+
 <nav class="tab-bar">
-  <button class="tab active" id="tab-today" onclick="go('today')">
-    <i class="ti ti-home"></i><span>Hoy</span>
-  </button>
-  <button class="tab" id="tab-stats" onclick="go('stats')">
-    <i class="ti ti-chart-bar"></i><span>Stats</span>
-  </button>
-  <button class="tab" id="tab-add" onclick="go('add')">
-    <i class="ti ti-circle-plus"></i><span>Agregar</span>
-  </button>
+  <button class="tab active" id="tab-today" onclick="go('today')"><i class="ti ti-home"></i><span>Hoy</span></button>
+  <button class="tab" id="tab-stats" onclick="go('stats')"><i class="ti ti-chart-bar"></i><span>Stats</span></button>
+  <button class="tab" id="tab-add" onclick="go('add')"><i class="ti ti-circle-plus"></i><span>Agregar</span></button>
 </nav>
 
 <script>
@@ -530,6 +424,11 @@ const COLORS = [
 
 let selEmoji = EMOJIS[0];
 let selColor = 0;
+let editId = null;
+let editEmoji = EMOJIS[0];
+let editColor = 0;
+let dragSrcIdx = null;
+
 let habits = JSON.parse(localStorage.getItem('mh_habits') || '[]');
 let done = JSON.parse(localStorage.getItem('mh_done') || '{}');
 
@@ -541,20 +440,28 @@ function save() {
 function dk(d) { return (d||new Date()).toISOString().slice(0,10); }
 function today() { return dk(); }
 
+// ── FIX 1: Racha correcta ──
+// La racha se calcula sobre días ANTERIORES a hoy, no sobre el estado actual de hoy.
+// Así, destildar algo de hoy no rompe lo que ya hiciste ayer.
 function streak(id) {
-  let s = 0, d = new Date();
-  for(let i=0;i<400;i++){
+  let s = 0;
+  // Empezamos desde AYER para no depender del estado actual de hoy
+  let d = new Date();
+  d.setDate(d.getDate() - 1);
+  for(let i = 0; i < 400; i++) {
     const k = dk(d);
-    if(done[k]&&done[k][id]) s++;
-    else if(i>0) break;
-    d.setDate(d.getDate()-1);
+    if(done[k] && done[k][id]) s++;
+    else break;
+    d.setDate(d.getDate() - 1);
   }
+  // Si hoy está completado, sumamos 1
+  if(done[today()] && done[today()][id]) s++;
   return s;
 }
 
 function bestStreak() {
   if(!habits.length) return 0;
-  return Math.max(...habits.map(h=>streak(h.id)));
+  return Math.max(...habits.map(h => streak(h.id)));
 }
 
 function renderHeader() {
@@ -596,18 +503,37 @@ function renderHabits() {
   el.innerHTML = habits.map((h,idx) => {
     const isDone = !!done[t][h.id];
     const s = streak(h.id);
-    return `<div class="habit-card${isDone?' done':''}" style="animation-delay:${idx*0.04}s">
+    return `<div class="habit-card${isDone?' done':''}" style="animation-delay:${idx*0.04}s" data-idx="${idx}">
+      <div class="drag-handle" data-idx="${idx}"><i class="ti ti-grip-vertical"></i></div>
       <div class="habit-icon" style="background:${COLORS[h.color].bg}">${h.emoji}</div>
       <div class="habit-body">
         <div class="habit-name">${h.name}</div>
         ${s>0?`<span class="habit-streak"><i class="ti ti-flame"></i>${s} ${s===1?'día':'días'}</span>`:''}
       </div>
-      <button class="check-btn" onclick="toggle('${h.id}')"><i class="ti ti-check"></i></button>
+      <div class="habit-actions">
+        <button class="edit-btn" onclick="openEdit('${h.id}')"><i class="ti ti-pencil"></i></button>
+        <button class="check-btn" onclick="toggle('${h.id}')"><i class="ti ti-check"></i></button>
+      </div>
       <button class="del-btn" onclick="del('${h.id}')"><i class="ti ti-x"></i></button>
     </div>`;
   }).join('');
 
+  initDragAndDrop();
   updateStats();
+}
+
+// ── FIX 2: Reinicio diario ──
+// Guardamos la última fecha de apertura. Si es un día nuevo, NO borramos los datos
+// (los datos históricos se conservan), simplemente los checks de hoy empiezan vacíos.
+function checkDailyReset() {
+  const lastOpen = localStorage.getItem('mh_last_open');
+  const t = today();
+  if(lastOpen !== t) {
+    // Nuevo día: inicializamos el objeto de hoy vacío si no existe
+    if(!done[t]) done[t] = {};
+    localStorage.setItem('mh_last_open', t);
+    save();
+  }
 }
 
 function toggle(id) {
@@ -675,21 +601,185 @@ function addHabit() {
   go('today');
 }
 
+// ── EDIT MODAL ──
+function openEdit(id) {
+  const h = habits.find(x=>x.id===id);
+  if(!h) return;
+  editId = id;
+  editEmoji = h.emoji;
+  editColor = h.color;
+  document.getElementById('edit-name').value = h.name;
+  renderEditEmojis();
+  renderEditColors();
+  document.getElementById('edit-overlay').classList.add('open');
+}
+
+function closeEdit(e) {
+  if(e && e.target !== document.getElementById('edit-overlay')) return;
+  document.getElementById('edit-overlay').classList.remove('open');
+  editId = null;
+}
+
+function saveEdit() {
+  if(!editId) return;
+  const name = document.getElementById('edit-name').value.trim();
+  if(!name) { document.getElementById('edit-name').focus(); return; }
+  const idx = habits.findIndex(h=>h.id===editId);
+  if(idx>=0){
+    habits[idx].name = name;
+    habits[idx].emoji = editEmoji;
+    habits[idx].color = editColor;
+  }
+  save();
+  renderHabits();
+  renderStats();
+  document.getElementById('edit-overlay').classList.remove('open');
+  editId = null;
+}
+
+function delFromEdit() {
+  if(!editId) return;
+  if(!confirm('¿Eliminar este hábito?')) return;
+  habits = habits.filter(h=>h.id!==editId);
+  save();
+  renderHabits();
+  renderStats();
+  document.getElementById('edit-overlay').classList.remove('open');
+  editId = null;
+}
+
+function renderEditEmojis() {
+  document.getElementById('edit-emo-pick').innerHTML = EMOJIS.map(e=>
+    `<div class="emo${e===editEmoji?' sel':''}" onclick="pickEditEmoji('${e}')">${e}</div>`
+  ).join('');
+}
+
+function pickEditEmoji(e) { editEmoji=e; renderEditEmojis(); }
+
+function renderEditColors() {
+  document.getElementById('edit-col-pick').innerHTML = COLORS.map((c,i)=>
+    `<div class="col-opt${i===editColor?' sel':''}" style="background:${c.accent}" onclick="pickEditColor(${i})"></div>`
+  ).join('');
+}
+
+function pickEditColor(i) { editColor=i; renderEditColors(); }
+
+// ── ADD FORM PICKERS ──
 function renderEmojis() {
   document.getElementById('emo-pick').innerHTML = EMOJIS.map(e=>
     `<div class="emo${e===selEmoji?' sel':''}" onclick="pickEmoji('${e}')">${e}</div>`
   ).join('');
 }
-
 function pickEmoji(e) { selEmoji=e; renderEmojis(); }
-
 function renderColors() {
   document.getElementById('col-pick').innerHTML = COLORS.map((c,i)=>
     `<div class="col-opt${i===selColor?' sel':''}" style="background:${c.accent}" onclick="pickColor(${i})"></div>`
   ).join('');
 }
-
 function pickColor(i) { selColor=i; renderColors(); }
+
+// ── DRAG AND DROP (touch + mouse) ──
+function initDragAndDrop() {
+  const cards = document.querySelectorAll('.habit-card');
+  const handles = document.querySelectorAll('.drag-handle');
+
+  handles.forEach(handle => {
+    // Touch
+    handle.addEventListener('touchstart', onTouchStart, {passive:false});
+    // Mouse
+    handle.addEventListener('mousedown', onMouseDown);
+  });
+}
+
+let dragging = null;
+let dragClone = null;
+let dragStartY = 0;
+let dragStartScrollY = 0;
+
+function getDragIdx(e) {
+  return parseInt(e.currentTarget.dataset.idx);
+}
+
+function onTouchStart(e) {
+  e.preventDefault();
+  const idx = parseInt(e.currentTarget.dataset.idx);
+  startDrag(idx, e.touches[0].clientY);
+  document.addEventListener('touchmove', onTouchMove, {passive:false});
+  document.addEventListener('touchend', onTouchEnd);
+}
+
+function onMouseDown(e) {
+  e.preventDefault();
+  const idx = parseInt(e.currentTarget.dataset.idx);
+  startDrag(idx, e.clientY);
+  document.addEventListener('mousemove', onMouseMove);
+  document.addEventListener('mouseup', onMouseUp);
+}
+
+function startDrag(idx, clientY) {
+  dragSrcIdx = idx;
+  dragStartY = clientY;
+  dragStartScrollY = window.scrollY;
+  const card = document.querySelectorAll('.habit-card')[idx];
+  card.classList.add('dragging');
+  dragging = card;
+}
+
+function onTouchMove(e) {
+  e.preventDefault();
+  moveDrag(e.touches[0].clientY);
+}
+function onMouseMove(e) { moveDrag(e.clientY); }
+
+function moveDrag(clientY) {
+  if(dragSrcIdx === null) return;
+  const cards = document.querySelectorAll('.habit-card');
+  let targetIdx = null;
+  cards.forEach((card, i) => {
+    if(i === dragSrcIdx) return;
+    const rect = card.getBoundingClientRect();
+    const mid = rect.top + rect.height / 2;
+    if(clientY > rect.top && clientY < rect.bottom) {
+      targetIdx = i;
+    }
+    card.classList.remove('drag-over');
+  });
+  if(targetIdx !== null) {
+    cards[targetIdx].classList.add('drag-over');
+  }
+}
+
+function onTouchEnd(e) {
+  endDrag(e.changedTouches[0].clientY);
+  document.removeEventListener('touchmove', onTouchMove);
+  document.removeEventListener('touchend', onTouchEnd);
+}
+function onMouseUp(e) {
+  endDrag(e.clientY);
+  document.removeEventListener('mousemove', onMouseMove);
+  document.removeEventListener('mouseup', onMouseUp);
+}
+
+function endDrag(clientY) {
+  if(dragSrcIdx === null) return;
+  const cards = document.querySelectorAll('.habit-card');
+  let targetIdx = null;
+  cards.forEach((card, i) => {
+    card.classList.remove('dragging','drag-over');
+    const rect = card.getBoundingClientRect();
+    if(clientY > rect.top && clientY < rect.bottom && i !== dragSrcIdx) {
+      targetIdx = i;
+    }
+  });
+  if(targetIdx !== null && targetIdx !== dragSrcIdx) {
+    const moved = habits.splice(dragSrcIdx, 1)[0];
+    habits.splice(targetIdx, 0, moved);
+    save();
+    renderHabits();
+  }
+  dragSrcIdx = null;
+  dragging = null;
+}
 
 function go(tab) {
   ['today','stats','add'].forEach(t=>{
@@ -701,6 +791,7 @@ function go(tab) {
 }
 
 // init
+checkDailyReset();
 renderHeader();
 renderWeek();
 renderEmojis();
